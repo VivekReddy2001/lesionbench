@@ -18,7 +18,7 @@ METHOD_LABELS = {
     "oversample": "+ class-balanced oversampling",
     "gan": "+ GAN top-up (real + synthetic)",
     "gan_mix": "+ GAN mix (balanced, 50% synthetic per minority class)",
-    "synthetic_only": "Synthetic only (train on GAN, test on real)",
+    "synthetic_only": "Synthetic only (1,000 GAN images per class; test on real)",
 }
 ORDER = list(METHOD_LABELS)
 HEADLINE = ["balanced_accuracy", "macro_f1", "accuracy", "macro_auroc", "ece"]

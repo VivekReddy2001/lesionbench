@@ -56,7 +56,7 @@ All methods train the same ~1.2M-parameter ResNet-style CNN at 64×64 for
 | `oversample` | `aug` + class-balanced sampling (minority images repeat) |
 | `gan` | `aug` + each minority class topped up with **synthetic** images to the size of the largest class |
 | `gan_mix` | `aug` + class-balanced sampling, where each minority class draws half its samples from real and half from synthetic images |
-| `synthetic_only` | Trained on synthetic images only, tested on real ones (a direct measure of synthetic-data quality) |
+| `synthetic_only` | Trained only on a balanced synthetic set (1,000 GAN images for each of the 7 classes), tested on real images: a direct measure of synthetic-data quality |
 
 `oversample` and `gan` are the key pair. Both present a balanced training
 stream; the only difference is whether minority examples are *repeated real

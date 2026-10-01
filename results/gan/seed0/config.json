@@ -1,0 +1,11 @@
+{
+  "iters": 3000,
+  "n_critic": 5,
+  "batch_size": 64,
+  "lr": 0.0001,
+  "gp_weight": 10.0,
+  "z_dim": 128,
+  "width": 32,
+  "seed": 0,
+  "threads": 4
+}

@@ -175,3 +175,19 @@ def test_nearest_neighbour_distance():
     ref = np.random.default_rng(0).integers(0, 256, (5, 4, 4, 3), dtype=np.uint8)
     assert np.allclose(nearest_neighbour_distance(ref, ref), 0)
     assert (nearest_neighbour_distance(255 - ref, ref) > 0).all()
+
+
+def test_synthetic_only_training_set_covers_every_class(tmp_path):
+    """Regression: the top-up set has no majority-class images, so the
+    train-on-synthetic evaluation must use its own balanced set."""
+    import json
+
+    from lesionbench.cli import TSTR_PER_CLASS, _balanced_synthetic
+    from lesionbench.models import Generator
+
+    cfg = {"z_dim": 16, "width": 8}
+    torch.save(Generator(K, cfg["z_dim"], cfg["width"]).state_dict(), tmp_path / "generator.pt")
+    (tmp_path / "config.json").write_text(json.dumps(cfg))
+    xs, ys = _balanced_synthetic(tmp_path, seed=0)
+    assert np.bincount(ys, minlength=K).tolist() == [TSTR_PER_CLASS] * K
+    assert xs.shape[1:] == (64, 64, 3)

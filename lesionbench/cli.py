@@ -19,6 +19,7 @@ import torch
 
 from . import data
 from .gan import GanConfig, nearest_neighbour_distance, sample, train_gan
+from .models import Generator
 from .train import METHODS, TrainConfig, train_classifier
 
 N_CLASSES = len(data.CLASSES)
@@ -52,6 +53,25 @@ def _splits(args):
     split = data.make_split(ds, args.split, args.seed)
     parts = {k: (ds.images[v], ds.labels[v]) for k, v in split.items()}
     return ds, split, parts
+
+
+TSTR_PER_CLASS = 1000  # balanced synthetic set for train-on-synthetic / test-on-real
+
+
+def _balanced_synthetic(gan_dir: Path, seed: int) -> tuple[np.ndarray, np.ndarray]:
+    """All seven classes, equally represented, sampled from the saved
+    generator. Used by ``synthetic_only``: the top-up set contains no nevi
+    at all (the majority class needs no top-up), so a model trained on it
+    alone could never predict the most common diagnosis."""
+    path = gan_dir / "synthetic_balanced.npz"
+    if not path.exists():
+        cfg = json.loads((gan_dir / "config.json").read_text())
+        G = Generator(N_CLASSES, cfg["z_dim"], cfg["width"])
+        G.load_state_dict(torch.load(gan_dir / "generator.pt", map_location="cpu"))
+        xs, ys = sample(G, {c: TSTR_PER_CLASS for c in range(N_CLASSES)}, seed=seed + 10_000)
+        np.savez_compressed(path, images=xs, labels=ys)
+    z = np.load(path)
+    return z["images"], z["labels"]
 
 
 def cmd_gan(args) -> None:
@@ -95,8 +115,12 @@ def cmd_classify(args) -> None:
     if args.method in {"gan", "gan_mix", "synthetic_only"}:
         if args.split != "lesion":
             raise SystemExit("GAN methods are only run on the lesion-level split")
-        z = np.load(Path(args.out) / "gan" / f"seed{args.seed}" / "synthetic.npz")
-        synth = (z["images"], z["labels"])
+        gan_dir = Path(args.out) / "gan" / f"seed{args.seed}"
+        if args.method == "synthetic_only":
+            synth = _balanced_synthetic(gan_dir, args.seed)
+        else:
+            z = np.load(gan_dir / "synthetic.npz")
+            synth = (z["images"], z["labels"])
     cfg = TrainConfig(method=args.method, steps=args.steps, seed=args.seed, threads=args.threads)
     res = train_classifier(cfg, parts["train"], parts["val"], parts["test"], N_CLASSES, synth=synth)
     res.pop("model")

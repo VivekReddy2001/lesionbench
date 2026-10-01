@@ -7,3 +7,4 @@ data/
 # large, regenerable outputs
 results/gan/*/generator.pt
 results/gan/*/synthetic.npz
+results/gan/*/synthetic_balanced.npz
