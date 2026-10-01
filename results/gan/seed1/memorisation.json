@@ -1,0 +1,44 @@
+{
+  "MEL": {
+    "train_images": 779,
+    "synthetic_generated": 3914,
+    "synthetic_nn_median": 12.338191032409668,
+    "test_real_nn_median": 11.197108268737793,
+    "synthetic_closer_than_5pct_real": 0.006
+  },
+  "BCC": {
+    "train_images": 359,
+    "synthetic_generated": 4334,
+    "synthetic_nn_median": 9.212580680847168,
+    "test_real_nn_median": 8.22549057006836,
+    "synthetic_closer_than_5pct_real": 0.0
+  },
+  "AKIEC": {
+    "train_images": 229,
+    "synthetic_generated": 4464,
+    "synthetic_nn_median": 9.775538444519043,
+    "test_real_nn_median": 10.205947875976562,
+    "synthetic_closer_than_5pct_real": 0.002
+  },
+  "BKL": {
+    "train_images": 770,
+    "synthetic_generated": 3923,
+    "synthetic_nn_median": 9.28681755065918,
+    "test_real_nn_median": 8.931398391723633,
+    "synthetic_closer_than_5pct_real": 0.006
+  },
+  "DF": {
+    "train_images": 81,
+    "synthetic_generated": 4612,
+    "synthetic_nn_median": 9.742134094238281,
+    "test_real_nn_median": 7.908117771148682,
+    "synthetic_closer_than_5pct_real": 0.01
+  },
+  "VASC": {
+    "train_images": 99,
+    "synthetic_generated": 4594,
+    "synthetic_nn_median": 10.724441528320312,
+    "test_real_nn_median": 9.890981674194336,
+    "synthetic_closer_than_5pct_real": 0.008
+  }
+}
