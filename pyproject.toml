@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lesionbench"
+version = "0.1.0"
+description = "Does synthetic data actually help? A reproducible benchmark of class-imbalance strategies on HAM10000 with lesion-level splits."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Vivek Reddy Pitta" }]
+requires-python = ">=3.10"
+dependencies = ["torch>=2.1", "numpy>=1.26", "scikit-learn>=1.3", "pillow>=10", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.setuptools]
+packages = ["lesionbench"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore:The least populated class:UserWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
