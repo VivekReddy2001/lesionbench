@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite it as below."
+title: "LesionBench: does synthetic data actually help imbalanced dermoscopy classification?"
+type: software
+authors:
+  - family-names: Pitta
+    given-names: Vivek Reddy
+repository-code: "https://github.com/VivekReddy2001/lesionbench"
+license: MIT
+version: 0.1.0
+date-released: 2026-10-01
+keywords:
+  - class imbalance
+  - generative augmentation
+  - WGAN-GP
+  - HAM10000
+  - dermoscopy
+  - benchmark
+references:
+  - type: conference-paper
+    title: "SkinAid: A GAN-based Automatic Skin Lesion Monitoring Method for IoMT Frameworks"
+    authors:
+      - family-names: Medi
+        given-names: Prathistith Raj
+      - family-names: Nemani
+        given-names: Praneeth
+      - family-names: Pitta
+        given-names: Vivek Reddy
+      - family-names: Udutalapally
+        given-names: Venkanna
+      - family-names: Das
+        given-names: Debanjan
+      - family-names: Mohanty
+        given-names: Saraju P.
+    collection-title: "2021 19th OITS International Conference on Information Technology (OCIT)"
+    year: 2021
+    doi: "10.1109/OCIT53463.2021.00048"
+  - type: article
+    title: "The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions"
+    authors:
+      - family-names: Tschandl
+        given-names: Philipp
+      - family-names: Rosendahl
+        given-names: Cliff
+      - family-names: Kittler
+        given-names: Harald
+    journal: "Scientific Data"
+    volume: 5
+    year: 2018
+    doi: "10.1038/sdata.2018.161"
