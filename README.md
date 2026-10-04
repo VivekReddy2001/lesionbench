@@ -97,8 +97,10 @@ Every run's metrics, training curve and test probabilities are in
 The common image-level split inflates balanced accuracy by **+0.05 to
 +0.08**, about the same as the gap between the best and worst sensible
 methods above. Over a third of its test images are near-duplicates of
-training images. Results reported on HAM10000 without a lesion-level split,
-including our own 2021 paper, should be read with this in mind.
+training images. Results reported on HAM10000 without a lesion-level split
+should be read with this in mind. That includes our own 2021 paper, whose
+evaluation (its equation 4) also placed part of the GAN-generated images in
+the test set; every test image here is a real, held-out lesion.
 
 ### Samples
 
